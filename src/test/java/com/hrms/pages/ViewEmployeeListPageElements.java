@@ -20,8 +20,8 @@ public class ViewEmployeeListPageElements {
 	@FindBy (xpath="//table[@id='resultTable']/tbody/tr/td/a")
 	public WebElement afterSearchEmpId;
 	
-	@FindBy (id="empsearch_employee_name_empName")
-	public WebElement employeeName;
+	@FindBy (xpath="(//table[@id='resultTable']//td/a)[2]")
+	public WebElement empSrcFirstName;
 	
 	public ViewEmployeeListPageElements() {
 		PageFactory.initElements(BaseClass.driver, this);
