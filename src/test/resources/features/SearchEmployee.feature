@@ -5,7 +5,7 @@ Feature: Employee Search
     Given user is logged in with valid admin credentials
     Given user navigates to employee list page
 
-  @smoke
+  
   Scenario: Search employee by id
     When user enters valid employee id
     And user clicks on search button

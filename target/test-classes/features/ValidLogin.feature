@@ -1,17 +1,20 @@
 Feature: Valid Login
+  #previous written test
+  #@smoke
+  #Scenario: Login with valid credentials
+    #When user enters valid "<Username>"
+    #And user enter valid "<Password>"
+    #And user clicks login button
+    #Then user sees dashboard with Welcome "<FirstName>"
 
-	@smoke
-  Scenario: Login with valid Admin credentials
-    
-    When user enters valid Admin username
-    And user enter valid Admin password
+
+  Scenario Outline: 
+    When user enters valid "<Username>"
+    And user enter valid "<Password>"
     And user clicks login button
-    Then user sees dashboard with Welcome Admin
+    Then user sees dashboard with Welcome "<FirstName>"
 
-  @smoke
-  Scenario: Login with valid ESS credentials
-    When user enters valid ESS username
-    And user enter valid ESS password
-    And user clicks login button
-    Then user sees dashboard with Welcome ESS
-
+    Examples: 
+      | Username | Password    | FirstName |
+      | Admin    | Hum@nhrm123 | Admin     |
+      | abd77    | Syntax123!  | Abdullah  |

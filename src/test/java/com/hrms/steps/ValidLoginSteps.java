@@ -12,14 +12,15 @@ import io.cucumber.java.en.When;
 public class ValidLoginSteps extends CommonMethods {
 	
 
-	@When("user enters valid Admin username")
-	public void user_enters_valid_Admin_username() {
-	sendText(login.username,ConfigsReader.getProperty("username"));
+	
+	@When("user enters valid {string}")
+	public void user_enters_valid_username(String username) {
+	sendText(login.username,username);
 	}
 
-	@When("user enter valid Admin password")
-	public void user_enter_valid_Admin_password() {
-		sendText(login.password,ConfigsReader.getProperty("password"));    
+	@When("user enter valid {string}")
+	public void user_enter_valid_password(String password) {
+		sendText(login.password,password);    
 	}
 
 	@When("user clicks login button")
@@ -27,30 +28,11 @@ public class ValidLoginSteps extends CommonMethods {
 	 click(login.loginBtn);   
 	}
 
-	@Then("user sees dashboard with Welcome Admin")
-	public void user_sees_dashboard_with_Welcome_Admin() {
-		String expectedWelcome="Welcome Admin";
+	@Then("user sees dashboard with Welcome {string}")
+	public void user_sees_dashboard_with_Welcome_first_name(String firstName) {
+		String expectedWelcome="Welcome "+firstName;
 		String actualWelcome =dashboard.welcome.getText();
 		Assert.assertEquals("Login did not work",expectedWelcome,actualWelcome);
-	
-	  
-	}
-
-	@When("user enters valid ESS username")
-	public void user_enters_valid_ESS_username() {
-	 sendText(login.username,ConfigsReader.getProperty("essUsername"));   
-	}
-
-	@When("user enter valid ESS password")
-	public void user_enter_valid_ESS_password() {
-		sendText(login.password,ConfigsReader.getProperty("essPassword"));  
-	}
-
-	@Then("user sees dashboard with Welcome ESS")
-	public void user_sees_dashboard_with_Welcome_ESS() {
-		String expectedWelcome="Welcome Kamala";
-		String actualWelcome =dashboard.welcome.getText();
-		Assert.assertEquals("Login did not work",expectedWelcome,actualWelcome); 
 		
 	}
 
