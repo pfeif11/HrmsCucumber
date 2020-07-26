@@ -38,6 +38,9 @@ public class PersonalDetailsPageElements {
 	@FindBy(id="personal_txtLicExpDate")
 	public WebElement driversLicenseExpDate;
 	
+	@FindBy(id="wrapper")
+	public WebElement wrapper;
+	
 	@FindBy(id="personal_txtNICNo")
 	public WebElement ssn;
 	

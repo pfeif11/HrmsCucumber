@@ -7,7 +7,7 @@ Feature: Employee Search
 
   
   Scenario: Search employee by id
-    When user enters valid employee id
+    When user enters valid employee id "10079"
     And user clicks on search button
     Then user sees employee information is displayed
 

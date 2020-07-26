@@ -1,139 +1,166 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/test/resources/features/InvalidLogin.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/test/resources/features/APIWorkflow.feature");
 formatter.feature({
-  "name": "Login with Invalid Credentials",
+  "name": "Syntax HRMS API End to End Workflow",
+  "description": "  Description: This feature tests and verifies Syntax HRMS Web Services\n  The workflow consists of the following sequential calls",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "name": "@workflow"
+    }
+  ]
+});
+formatter.background({
+  "name": "",
   "description": "",
-  "keyword": "Feature"
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "a JWT is generated",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.TokenGenerationSteps.a_JWT_is_generated()"
+});
+formatter.result({
+  "status": "passed"
 });
 formatter.scenario({
-  "name": "Entering multiple invalid credentials",
+  "name": "Creating an employee",
   "description": "",
   "keyword": "Scenario",
   "tags": [
     {
-      "name": "@regression"
+      "name": "@workflow"
     }
   ]
 });
-formatter.before({
+formatter.step({
+  "name": "a request is prepared to create an employee",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.a_request_is_prepared_to_create_an_employee()"
+});
+formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "user enters invalid username and password, click login and see error message",
+  "name": "a POST call is made to create an employee",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.a_POST_call_is_made_to_create_an_employee()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the status code for creating an employee is 201",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.the_status_code_for_creating_an_employee_is(int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee is created and response contains key \"Message\" and value \"Entry Created\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.the_employee_is_created_and_response_contains_key_and_value(java.lang.String,java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the employee ID \"Employee[0].employee_id\" is stored as a global variable to be used for other calls",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.the_employee_ID_is_stored_as_a_global_variable_to_be_used_for_other_calls(java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.background({
+  "name": "",
+  "description": "",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "a JWT is generated",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.TokenGenerationSteps.a_JWT_is_generated()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Retrieving created employee",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@workflow"
+    }
+  ]
+});
+formatter.step({
+  "name": "a request is prepared  to retrieve the created employee",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.a_request_is_prepared_to_retrieve_the_created_employee()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "a GET call is made to retrieve the created employee",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.a_GET_call_is_made_to_retrieve_the_created_employee()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the status code for retrieving the created employee is 200",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.the_status_code_for_retrieving_the_created_employee_is(int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the retrieved employee ID at \"employee[0].employee_id\" matches the globally stored employee ID",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.the_retrieved_employee_ID_at_matches_the_globally_stored_employee_ID(java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "the retrieved data at \"employee\" matches the data used to create an employee with employee ID \"employee[0].employee_id\"",
   "rows": [
-    {},
     {},
     {}
   ],
-  "keyword": "When "
-});
-formatter.match({
-  "location": "com.hrms.steps.InvalidLoginSteps.user_enters_invalid_username_and_password_click_login_and_see_error_message(io.cucumber.datatable.DataTable)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.embedding("image/png", "embedded0.png", "Entering multiple invalid credentials");
-formatter.after({
-  "status": "passed"
-});
-formatter.uri("file:src/test/resources/features/Login.feature");
-formatter.feature({
-  "name": "Login",
-  "description": "",
-  "keyword": "Feature"
-});
-formatter.scenario({
-  "name": "Login with valid username and without password",
-  "description": "",
-  "keyword": "Scenario",
-  "tags": [
-    {
-      "name": "@regression"
-    }
-  ]
-});
-formatter.before({
-  "status": "passed"
-});
-formatter.step({
-  "name": "user enter valid username",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "com.hrms.steps.LoginSteps.user_enter_valid_username()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "user enters empty password  and clicks login",
   "keyword": "And "
 });
 formatter.match({
-  "location": "com.hrms.steps.LoginSteps.user_enters_empty_password_and_clicks_login()"
+  "location": "com.hrms.API.steps.practice.WorkflowAllSteps.the_retrieved_data_at_matches_the_data_used_to_create_an_employee_with_employee_ID(java.lang.String,java.lang.String,io.cucumber.datatable.DataTable)"
 });
 formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "user sees Password can not be empty error message",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "com.hrms.steps.LoginSteps.user_sees_Password_can_not_be_empty_error_message()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.embedding("image/png", "embedded1.png", "Login with valid username and without password");
-formatter.after({
-  "status": "passed"
-});
-formatter.scenario({
-  "name": "Login without username and valid password",
-  "description": "",
-  "keyword": "Scenario",
-  "tags": [
-    {
-      "name": "@regression"
-    }
-  ]
-});
-formatter.before({
-  "status": "passed"
-});
-formatter.step({
-  "name": "user enter empty username",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "com.hrms.steps.LoginSteps.user_enter_empty_username()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "user enters valid password  and clicks login",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "com.hrms.steps.LoginSteps.user_enters_valid_password_and_clicks_login()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "user sees Username can not be empty error message",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "com.hrms.steps.LoginSteps.user_sees_Username_can_not_be_empty_error_message()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.embedding("image/png", "embedded2.png", "Login without username and valid password");
-formatter.after({
   "status": "passed"
 });
 });

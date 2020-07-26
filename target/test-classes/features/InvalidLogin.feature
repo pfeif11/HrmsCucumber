@@ -1,5 +1,5 @@
 Feature: Login with Invalid Credentials
-	@regression
+	@invalid
   Scenario: Entering multiple invalid credentials
     When user enters invalid username and password, click login and see error message
       | Username | Password   | ErrorMessage        |
