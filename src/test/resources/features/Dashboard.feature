@@ -1,6 +1,7 @@
 #Author: pfeif11@vt.edu
 Feature: Dashboard menu view for Admin
 
+@regression @smoke
   Scenario: 
     Given user is logged into HRMS with Admin Credentials
     Then user should see dashboard menu is displayed
