@@ -32,7 +32,7 @@ public class WorkflowAllSteps {
 	@Given("a request is prepared to create an employee")
 	public void a_request_is_prepared_to_create_an_employee() {
 		request = given().header("Content-Type", "application/json").header("Authorization", TokenGenerationSteps.token)
-				.body(PayloadConstants.createEmployeeBody());
+				.body(PayloadConstants.createEmployeePayload());
 	}
 
 	@When("a POST call is made to create an employee")

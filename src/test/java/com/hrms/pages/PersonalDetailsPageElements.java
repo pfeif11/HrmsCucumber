@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.hrms.testbase.BaseClass;
 
 public class PersonalDetailsPageElements {
-
+//POM
 	@FindBy(id = "personal_cmbNation")
 	public WebElement nationalityDD;
 

@@ -1,5 +1,7 @@
 package com.hrms.API.utils;
 
+import org.json.JSONObject;
+
 import com.hrms.API.steps.practice.HardcodedExamples;
 
 public class PayloadConstants {
@@ -19,6 +21,23 @@ public class PayloadConstants {
 		
 		return createEmployeeBody;
 	}
+	//creating payload using JSONOBJECT amd returning it as a string
+	public static String createEmployeePayload() {
+		
+		JSONObject obj=new JSONObject();
+		obj.put("emp_firstname", "Roger");
+		obj.put("emp_lastname", "Federer");
+		obj.put("emp_middle_name", "F");
+		obj.put("emp_gender", "M");
+		obj.put("emp_birthday", "1981-08-08");
+		obj.put("emp_status", "Employee");
+		obj.put("emp_job_title", "Graphic Designer");
+		
+		return obj.toString();
+	}
+	
+	
+	
 	public static String updateCreatedEmpBody() {
 		
 		String updateBody="{\r\n" + 
