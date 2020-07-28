@@ -7,7 +7,7 @@ Feature: Valid Login
     #And user clicks login button
     #Then user sees dashboard with Welcome "<FirstName>"
 
-
+	@regression
   Scenario Outline: 
     When user enters valid "<Username>"
     And user enter valid "<Password>"
@@ -17,4 +17,4 @@ Feature: Valid Login
     Examples: 
       | Username | Password    | FirstName |
       | Admin    | Hum@nhrm123 | Admin     |
-      | abd77    | Syntax123!  | Abdullah  |
+      
