@@ -24,7 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.hrms.testbase.PageInitializer;
 
 public class CommonMethods extends PageInitializer {
-
+//sdfsfsfds
 	/**
 	 * Method that clears and sends keys
 	 * 
