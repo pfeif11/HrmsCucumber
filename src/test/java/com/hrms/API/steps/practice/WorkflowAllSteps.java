@@ -21,29 +21,38 @@ import static io.restassured.RestAssured.*;
 
 import com.hrms.API.utils.APIConstants;
 import com.hrms.API.utils.PayloadConstants;
+import com.hrms.utils.API_CommonMethods;
 
-public class WorkflowAllSteps {
+public class WorkflowAllSteps extends API_CommonMethods{
 
-	String BaseURI = RestAssured.baseURI = "http://18.232.148.34/syntaxapi/api";
+	
 	RequestSpecification request;
 	Response response;
-	static String employeeID;
+	public static String employeeID;
 
+	/**
+	 * CREATE EMPLOYEE
+	 */
 	@Given("a request is prepared to create an employee")
 	public void a_request_is_prepared_to_create_an_employee() {
-		request = given().header("Content-Type", "application/json").header("Authorization", TokenGenerationSteps.token)
-				.body(PayloadConstants.createEmployeePayload());
+		request=prepareRequest(PayloadConstants.createEmployeeBody());
+		//request=prepareRequest(PayloadConstants.createEmployeePayload());
+		//request=headersInRequest().body(PayloadConstants.createEmployeePayload());
+//		request = given().header("Content-Type", "application/json").header("Authorization", TokenGenerationSteps.token)
+//				.body(PayloadConstants.createEmployeePayload());
 	}
 
 	@When("a POST call is made to create an employee")
 	public void a_POST_call_is_made_to_create_an_employee() {
 		response = request.when().post(APIConstants.CREATE_EMPLOYEE_ENDPOINT);
+		
 
 	}
 
-	@Then("the status code for creating an employee is {int}")
-	public void the_status_code_for_creating_an_employee_is(int statusCode) {
+	@Then("the status code is {int}")
+	public void the_status_code_is(int statusCode) {
 		response.then().assertThat().statusCode(statusCode);
+		System.out.println(statusCode);
 	}
 
 	@Then("the employee is created and response contains key {string} and value {string}")
@@ -57,21 +66,21 @@ public class WorkflowAllSteps {
 		System.out.println(employeeID);
 	}
 	
-	@Given("a request is prepared  to retrieve the created employee")
-	public void a_request_is_prepared_to_retrieve_the_created_employee() {
-		request=given().header("Content-Type","application/json").header("Authorization",TokenGenerationSteps.token).queryParam("employee_id", employeeID);
+	/**
+	 * GET CREATED EMPLOYEE
+	 */
+	
+	@Given("a request is prepared  to retrieve the employee from previous call")
+	public void a_request_is_prepared_to_retrieve_the_employee_from_previous_call() {
+		request=prepareRequest("employee_id",employeeID);
+		//request=headersInRequest().queryParams("employee_id", employeeID);
 		
-	    
+		//request=given().header("Content-Type","application/json").header("Authorization",TokenGenerationSteps.token).queryParam("employee_id", employeeID);
 	}
-
-	@When("a GET call is made to retrieve the created employee")
-	public void a_GET_call_is_made_to_retrieve_the_created_employee() {
-	   response=request.when().get(APIConstants.GET_ONE_EMPLOYEE_ENDPOINT);
-	}
-
-	@Then("the status code for retrieving the created employee is {int}")
-	public void the_status_code_for_retrieving_the_created_employee_is(int statusCode) {
-	   response.then().assertThat().statusCode(statusCode);
+	
+	@When("a GET call is made to retrieve the employee")
+	public void a_GET_call_is_made_to_retrieve_the_employee() {
+		response=request.when().get(APIConstants.GET_ONE_EMPLOYEE_ENDPOINT);
 	}
 
 	@Then("the retrieved employee ID at {string} matches the globally stored employee ID")
@@ -101,7 +110,62 @@ public class WorkflowAllSteps {
 	     String empID=response.body().jsonPath().getString(responseEmployeeID);
 		   Assert.assertTrue(empID.contentEquals(employeeID));
 	}
+	/**
+	 * UPDATE CREATED EMPLOYEE
+	 */
+	@Given("a request is prepared to Update the employee")
+	public void a_request_is_prepared_to_Update_the_employee() {
+		request=prepareRequest(PayloadConstants.updateCreatedEmplBody());
+		//request=headersInRequest().body(PayloadConstants.updateCreatedEmplBody());
+		//request=given().header("Content-Type","application/json").header("Authorization",TokenGenerationSteps.token).body(PayloadConstants.updateCreatedEmplBody());
+	}
 
+	@When("a PUT call is made to update the employee")
+	public void a_PUT_call_is_made_to_update_the_employee() {
+	    response=request.when().put(APIConstants.UPDATE_EMPLOYEE_ENDPOINT);
+	}
 
+	@Then("the employee is updated and response contains key {string} and value {string}")
+	public void the_employee_is_updated_and_response_contains_key_and_value(String key, String value) {
+	    response.then().assertThat().body(key, equalTo(value));
+	}
+	
+	/**
+	 * PARTIALLY UPDATE EMPLOYEE
+	 */
+
+	@Given("a request is prepared to partially update the employee")
+	public void a_request_is_prepared_to_partially_update_the_employee() {
+		request=prepareRequest(PayloadConstants.partialUpdateEmplBody());
+		//request = headersInRequest().body(PayloadConstants.partialUpdateEmplBody()); 
+	}
+
+	@When("a PATCH call is made to partially update the employee")
+	public void a_PATCH_call_is_made_to_partially_update_the_employee() {
+	   response=request.when().patch(APIConstants.PARTIAL_UPDATE_EMPLOYEE_ENDPOINT);
+	}
+
+	/**
+	 * DELETING EMPLOYEE
+	 */
+	
+	@Given("a request is prepared  to delete an employee")
+	public void a_request_is_prepared_to_delete_an_employee() {
+		request=prepareRequest("employee_id",employeeID);
+		//request = headersInRequest().queryParam("employee_id", employeeID);
+		//request=given().header("Content-Type","application/json").header("Authorization",TokenGenerationSteps.token).queryParam("employee_id", employeeID);
+	}
+
+	@When("a DELETE call is made to delete the employee")
+	public void a_DELETE_call_is_made_to_delete_the_employee() {
+	    response=request.when().delete(APIConstants.DELETE_EMPLOYEE_ENDPOINT);
+	}
+	
+	@Then("verifying the employee is deleted with get call with response containing key {string} and value {string}")
+	public void verifying_the_employee_is_deleted_with_get_call_with_response_containing_key_and_value(String key, String value) {
+		request=prepareRequest("employee_id",employeeID);
+		response=request.when().get(APIConstants.GET_ONE_EMPLOYEE_ENDPOINT);
+		response.then().assertThat().body(key, equalTo(value));
+	}
 
 }

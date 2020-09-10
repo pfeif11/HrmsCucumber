@@ -3,6 +3,7 @@ package com.hrms.API.utils;
 import org.json.JSONObject;
 
 import com.hrms.API.steps.practice.HardcodedExamples;
+import com.hrms.API.steps.practice.WorkflowAllSteps;
 
 public class PayloadConstants {
 	
@@ -44,7 +45,7 @@ public class PayloadConstants {
 				"  \"employee_id\": \""+HardcodedExamples.employeeID+"\",\r\n" + 
 				"  \"emp_firstname\": \"Rafa\",\r\n" + 
 				"  \"emp_lastname\": \"Nadal\",\r\n" + 
-				"  \"emp_middle_name\": \"\",\r\n" + 
+				"  \"emp_middle_name\": \"J\",\r\n" + 
 				"  \"emp_gender\": \"M\",\r\n" + 
 				"  \"emp_birthday\": \"1984-05-20\",\r\n" + 
 				"  \"emp_status\": \"Self-Employee\",\r\n" + 
@@ -54,5 +55,36 @@ public class PayloadConstants {
 		return updateBody;
 		
 	}
+	
+public static String updateCreatedEmplBody() {
+		
+		String updateBody="{\r\n" + 
+				"  \"employee_id\": \""+WorkflowAllSteps.employeeID+"\",\r\n" + 
+				"  \"emp_firstname\": \"Rafa\",\r\n" + 
+				"  \"emp_lastname\": \"Nadal\",\r\n" + 
+				"  \"emp_middle_name\": \"J\",\r\n" + 
+				"  \"emp_gender\": \"M\",\r\n" + 
+				"  \"emp_birthday\": \"1984-05-20\",\r\n" + 
+				"  \"emp_status\": \"Self-Employee\",\r\n" + 
+				"  \"emp_job_title\": \"Cloud Consultant\"\r\n" + 
+				"}";
+		
+		return updateBody;
+		
+	}
+
+public static String partialUpdateEmplBody() {
+	
+	String partialUpdateBody="{\r\n" + 
+			"  \"employee_id\": \""+WorkflowAllSteps.employeeID+"\",\r\n" + 
+			"  \"emp_firstname\": \"Novak\",\r\n" + 
+			"  \"emp_birthday\": \"1985-11-11\"\r\n" + 
+			"}";
+	
+	return partialUpdateBody;
+	
+}
+
+
 
 }

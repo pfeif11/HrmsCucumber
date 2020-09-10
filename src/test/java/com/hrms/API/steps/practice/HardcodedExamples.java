@@ -7,9 +7,15 @@ import io.restassured.specification.RequestSpecification;
 //rest assured packages
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 //importing jUnit packages
 import org.junit.Assert;
 import org.junit.Test;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 /*
@@ -32,7 +38,7 @@ public class HardcodedExamples {
 	// are going to use it
 	static String baseURI = RestAssured.baseURI = "http://18.232.148.34/syntaxapi/api";
 	public static String employeeID;
-	String token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTU2ODkzMTAsImlzcyI6ImxvY2FsaG9zdCIsImV4cCI6MTU5NTczMjUxMCwidXNlcklkIjoiNDg0In0.EYiyTHS78KCR8Ne3NZIVVRFLVglhBo7V9JNoVkZAu5o";
+	String token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY2NDA2NzEsImlzcyI6ImxvY2FsaG9zdCIsImV4cCI6MTU5NjY4Mzg3MSwidXNlcklkIjoiNDg0In0.YFb_U_SinlDkaTrvDQPfhbXcYBn7ZbeXuBr180rEw-Q";
 
 	public void sampleTestNotes() {
 		// baseURL for all calls
@@ -135,6 +141,7 @@ public class HardcodedExamples {
 		// creating an object of json path
 		// 2nd way
 		JsonPath js = new JsonPath(response);
+		
 		String emplID = js.getString("employee[0].employee_id");
 		String firstName = js.getString("employee[0].emp_firstname");
 		String middleName = js.getString("employee[0].emp_middle_name");
@@ -254,6 +261,9 @@ public class HardcodedExamples {
 		System.out.println("----------DELETING EMPLOYEE---------");
 		deletingEmployeeResponse.prettyPrint();
 		deletingEmployeeResponse.then().assertThat().body("message", equalTo("Entry deleted"));
+		deletingEmployeeResponse.then().assertThat().statusCode(201);
+		System.out.println(deletingEmployeeResponse.getStatusCode());
+		
 	}
 	
 	@Test
@@ -270,6 +280,15 @@ public class HardcodedExamples {
 		RequestSpecification jobTitlesRequest=given().header("Content-Type","application/json").header("Authorization",token);
 		Response jobTitlesResponse=jobTitlesRequest.when().get("/jobTitle.php");
 		System.out.println("-----------GETTING JOB TITLES---------");
-		jobTitlesResponse.prettyPrint();
+		//jobTitlesResponse.prettyPrint();
+		JSONObject jsonObj = new JSONObject(jobTitlesResponse);
+		JSONArray arrJson = jsonObj.getJSONArray("Job Title List");
+		String[] arr = new String[arrJson.length()];
+		for (int i = 0; i < arrJson.length(); i++) {
+			arr[i] = arrJson.getString(i);
+			System.out.println(arr[i]);
+		}
+		
+		} 
 	}
-}
+

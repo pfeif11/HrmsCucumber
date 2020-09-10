@@ -1,0 +1,9 @@
+{
+  "emp_firstname": "Roger",
+  "emp_lastname": "Federer",
+  "emp_middle_name": "F",
+  "emp_gender": "M",
+  "emp_birthday": "1981-08-08",
+  "emp_status": "Employee",
+  "emp_job_title": "Graphic Designer"
+}

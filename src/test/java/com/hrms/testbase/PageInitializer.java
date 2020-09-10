@@ -9,7 +9,7 @@ import com.hrms.pages.PersonalDetailsPageElements;
 import com.hrms.pages.ViewEmployeeListPageElements;
 
 
-//initializes all pages class and stores references in static varibales
+//initializes all pages class and stores references in static variables
 //that will called/used in test classes
 public class PageInitializer extends BaseClass{
 
